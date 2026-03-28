@@ -3,7 +3,7 @@ export const WINDOW_DEFINITIONS = [
   { id: 'projects', title: 'Projects', type: 'folder' },
   { id: 'work-exp', title: 'Work Experience', type: 'folder' },
   { id: 'resume', title: 'Resume', type: 'folder' },
-  { id: 'contact', title: 'Socials', type: 'folder' },
+  { id: 'contact', title: 'Contact Me', type: 'folder' },
   { id: 'terminal', title: 'Terminal', type: 'app' },
 ]
 

@@ -82,6 +82,33 @@ body {
     );
   }
 
+  .desktop-folder-item {
+    width: 4.5rem;
+  }
+
+  .desktop-folder-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .desktop-folder-label {
+    font-size: 0.68rem;
+  }
+
+  .app-dock-nav {
+    gap: 0.5rem;
+  }
+
+  .dock-app-button {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .dock-app-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
   .wallpaper-image-layer {
     background-image: var(--phone-wallpaper-image);
     background-position: var(--phone-wallpaper-position, center top);

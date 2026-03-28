@@ -20,12 +20,12 @@ const dockItems = [
   { id: 'safari', title: 'Certification', windowId: 'safari' },
   { id: 'photos', title: 'Photos', windowId: 'photos' },
   { id: 'terminal', title: 'Terminal', windowId: 'terminal' },
-  { id: 'contact', title: 'Contact', windowId: 'contact' },
+  { id: 'contact', title: 'Contact Me', windowId: 'contact' },
 ]
 
 function DockVisual({ item }) {
   const iconSrc = ICON_SOURCES[item.id]
-  if (iconSrc) return <img src={iconSrc} alt={item.title} className="h-12 w-12" />
+  if (iconSrc) return <img src={iconSrc} alt={item.title} className="dock-app-icon h-12 w-12" />
   return null
 }
 
@@ -59,7 +59,7 @@ export function Dock({ openWindows, onAppClick }) {
                 title={item.title}
                 ref={(node) => registerItem(item.id, node)}
                 onClick={() => onAppClick(item, itemRefs.current[item.id]?.getBoundingClientRect())}
-                className="group relative flex h-16 w-16 origin-bottom items-center justify-center"
+                className="dock-app-button group relative flex h-16 w-16 origin-bottom items-center justify-center"
               >
                 <DockVisual item={item} />
                 {hasIndicator && <span className="absolute -bottom-2 h-1.5 w-1.5 rounded-full bg-slate-900/80" />}

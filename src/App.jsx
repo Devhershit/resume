@@ -21,7 +21,7 @@ const TITLES = {
   projects: 'Projects',
   'work-exp': 'Work Experience',
   resume: 'Resume',
-  contact: 'Contact',
+  contact: 'Contact Me',
   safari: 'Certification',
   photos: 'Photos',
   terminal: 'Terminal',

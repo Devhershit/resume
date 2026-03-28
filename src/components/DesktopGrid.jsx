@@ -19,15 +19,15 @@ function FolderItem({ id, onOpenFolder, isTouchViewport }) {
   }
 
   return (
-    <div className="pointer-events-auto w-20 select-none sm:w-24">
+    <div className="desktop-folder-item pointer-events-auto w-20 select-none sm:w-24">
       <button
         type="button"
         className="flex w-full flex-col items-center gap-2 rounded-xl p-2 text-white/95 outline-none"
         onClick={handleClick}
         onDoubleClick={handleDoubleClick}
       >
-        <FolderIcon className="h-12 w-12 sm:h-16 sm:w-16" />
-        <span className="px-2 py-0.5 text-center text-xs font-medium tracking-wide text-white/95">
+        <FolderIcon className="desktop-folder-icon h-12 w-12 sm:h-16 sm:w-16" />
+        <span className="desktop-folder-label px-2 py-0.5 text-center text-xs font-medium tracking-wide text-white/95">
           {folder.title}
         </span>
       </button>

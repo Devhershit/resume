@@ -44,9 +44,11 @@ const getCommandLines = (normalized, prompt) => {
 
   if (normalized === 'socials') {
     return [
+      'Instagram: https://www.instagram.com/',
       'X: https://x.com/CarbonClicks',
-      'GitHub: https://github.com/Devhershit',
       'LinkedIn: https://linkedin.com/in/harshit-gahlawat',
+      'Mail: mailto:harshitgahlawat33@gmail.com',
+      'GitHub: https://github.com/Devhershit',
     ]
   }
 
