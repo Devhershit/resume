@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Draggable from 'react-draggable'
 import { Maximize2, Minus, X } from 'lucide-react'
 import { useWindowAnimation } from '../hooks/useWindowAnimation'
@@ -7,9 +7,24 @@ export function MacWindow({ windowData, onFocus, onClose, onMinimize, onToggleMa
   const shellRef = useRef(null)
   const animationRef = useRef(null)
   const nodeRef = useRef(null)
+  const [isMobileViewport, setIsMobileViewport] = useState(false)
   const { animateClose } = useWindowAnimation(animationRef, windowData.sourceRect)
   const safeSize = windowData.size ?? { width: 560, height: 560 }
   const safePosition = windowData.position ?? { x: 140, y: 110 }
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+
+    const query = window.matchMedia('(max-width: 768px)')
+    const updateViewport = () => setIsMobileViewport(query.matches)
+
+    updateViewport()
+    query.addEventListener('change', updateViewport)
+
+    return () => {
+      query.removeEventListener('change', updateViewport)
+    }
+  }, [])
 
   const commitResize = () => {
     if (!shellRef.current || windowData.isMaximized) return
@@ -22,6 +37,15 @@ export function MacWindow({ windowData, onFocus, onClose, onMinimize, onToggleMa
   const handleClose = async () => {
     await animateClose(windowData.sourceRect)
     onClose(windowData.id)
+  }
+
+  const handleWindowDrag = (_, data) => {
+    if (isMobileViewport) {
+      onMove(windowData.id, { x: safePosition.x, y: data.y })
+      return
+    }
+
+    onMove(windowData.id, { x: data.x, y: data.y })
   }
 
   const shellStyle = windowData.isMaximized
@@ -43,12 +67,13 @@ export function MacWindow({ windowData, onFocus, onClose, onMinimize, onToggleMa
     <Draggable
       nodeRef={nodeRef}
       disabled={windowData.isMaximized}
+      axis={isMobileViewport ? 'y' : 'both'}
       handle=".window-handle"
       cancel=".window-control-button"
       position={windowData.isMaximized ? { x: 0, y: 54 } : safePosition}
       onStart={() => onFocus(windowData.id)}
-      onDrag={(_, data) => onMove(windowData.id, { x: data.x, y: data.y })}
-      onStop={(_, data) => onMove(windowData.id, { x: data.x, y: data.y })}
+      onDrag={handleWindowDrag}
+      onStop={handleWindowDrag}
     >
       <article ref={nodeRef} className="pointer-events-auto absolute" style={{ zIndex: windowData.zIndex }} onMouseDown={() => onFocus(windowData.id)}>
         <div
@@ -95,7 +120,7 @@ export function MacWindow({ windowData, onFocus, onClose, onMinimize, onToggleMa
               <h2 className="pr-2 text-xs font-semibold tracking-wide text-slate-700">{windowData.title}</h2>
             </header>
 
-            <div className="h-[calc(100%-40px)] overflow-auto bg-white/55">{children}</div>
+            <div className="window-content-scroll h-[calc(100%-40px)] overflow-auto bg-white/55">{children}</div>
           </section>
         </div>
       </article>

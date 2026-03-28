@@ -80,6 +80,12 @@ body {
     max-height: calc(
       var(--app-viewport-height) - var(--menu-bar-height) - var(--dock-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - (var(--content-safe-padding) * 2)
     );
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .app-desktop-folders::-webkit-scrollbar {
+    display: none;
   }
 
   .desktop-folder-item {
@@ -107,6 +113,15 @@ body {
   .dock-app-icon {
     width: 2.25rem;
     height: 2.25rem;
+  }
+
+  .window-content-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .window-content-scroll::-webkit-scrollbar {
+    display: none;
   }
 
   .wallpaper-image-layer {
