@@ -11,6 +11,7 @@ import { ProjectsContent } from './content/ProjectsContent'
 import { WorkExpContent } from './content/WorkExpContent'
 import { ResumeContent } from './content/ResumeContent'
 import { ContactContent } from './content/ContactContent'
+import { SocialsContent } from './content/SocialsContent'
 import { TerminalContent } from './content/TerminalContent'
 import { PhotosContent } from './content/PhotosContent'
 import { SafariContent } from './content/SafariContent'
@@ -21,6 +22,7 @@ const TITLES = {
   projects: 'Projects',
   'work-exp': 'Work Experience',
   resume: 'Resume',
+  socials: 'Socials',
   contact: 'Contact Me',
   safari: 'Certification',
   photos: 'Photos',
@@ -58,6 +60,7 @@ function App() {
       projects: <ProjectsContent />,
       'work-exp': <WorkExpContent />,
       resume: <ResumeContent />,
+      socials: <SocialsContent />,
       contact: <ContactContent />,
       safari: <SafariContent />,
       photos: <PhotosContent />,
