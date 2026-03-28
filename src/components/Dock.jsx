@@ -17,7 +17,7 @@ const ICON_SOURCES = {
 
 const dockItems = [
   { id: 'launchpad', title: 'Launchpad' },
-  { id: 'safari', title: 'Safari', windowId: 'safari' },
+  { id: 'safari', title: 'Certification', windowId: 'safari' },
   { id: 'photos', title: 'Photos', windowId: 'photos' },
   { id: 'terminal', title: 'Terminal', windowId: 'terminal' },
   { id: 'contact', title: 'Contact', windowId: 'contact' },
@@ -33,7 +33,7 @@ export function Dock({ openWindows, onAppClick }) {
   const { registerItem, onPointerMove, onPointerLeave, itemRefs } = useDockMagnify()
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-5 z-[90] flex justify-center px-4">
+    <div className="app-dock pointer-events-none fixed inset-x-0 bottom-5 z-[90] flex justify-center px-4">
       <GlassSurface
         width="min(92vw, 560px)"
         height={86}
@@ -48,7 +48,7 @@ export function Dock({ openWindows, onAppClick }) {
         opacity={0.93}
         mixBlendMode="screen"
       >
-        <nav onPointerMove={onPointerMove} onPointerLeave={onPointerLeave} className="flex items-end gap-3 px-2">
+        <nav onPointerMove={onPointerMove} onPointerLeave={onPointerLeave} className="app-dock-nav flex items-end gap-3 px-2">
           {dockItems.map((item) => {
             const hasIndicator = item.windowId ? Boolean(openWindows[item.windowId]) : false
 

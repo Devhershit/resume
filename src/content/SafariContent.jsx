@@ -24,7 +24,7 @@ export function SafariContent() {
     <div className="h-full overflow-auto bg-white/85 p-6">
       <div className="mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.12)]">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h3 className="text-xl font-semibold text-slate-900">Safari - Certifications</h3>
+          <h3 className="text-xl font-semibold text-slate-900">Certification</h3>
           <a
             href="/Harshit_Resume.pdf"
             target="_blank"

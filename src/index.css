@@ -34,6 +34,82 @@ body {
     linear-gradient(125deg, #2455a9 0%, #3579cc 26%, #67a8e5 56%, #94c7ee 100%);
 }
 
+.app-shell {
+  --app-viewport-height: 100svh;
+  --menu-bar-height: 56px;
+  --dock-height: 116px;
+  --content-safe-padding: 12px;
+  --window-maximized-offset: 112px;
+  --window-default-offset: 70px;
+}
+
+.wallpaper-image-layer {
+  background-image: var(--desktop-wallpaper-image);
+  background-position: var(--desktop-wallpaper-position, center center);
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  html,
+  body,
+  #root,
+  .app-shell {
+    min-height: var(--app-viewport-height);
+  }
+
+  body,
+  .app-shell {
+    overflow-x: hidden;
+  }
+
+  .app-menu-bar {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+
+  .app-dock {
+    bottom: 0;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .app-desktop-grid {
+    top: calc(var(--menu-bar-height) + env(safe-area-inset-top));
+    bottom: calc(var(--dock-height) + env(safe-area-inset-bottom));
+  }
+
+  .app-desktop-folders {
+    max-height: calc(
+      var(--app-viewport-height) - var(--menu-bar-height) - var(--dock-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - (var(--content-safe-padding) * 2)
+    );
+  }
+
+  .wallpaper-image-layer {
+    background-image: var(--phone-wallpaper-image);
+    background-position: var(--phone-wallpaper-position, center top);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: translateZ(0);
+  }
+
+  .wallpaper-overlay-layer {
+    opacity: 0.94;
+  }
+}
+
+@supports (height: 100dvh) {
+  @media (max-width: 768px) {
+    .app-shell {
+      --app-viewport-height: 100dvh;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .app-shell {
+    --dock-height: 108px;
+    --content-safe-padding: 10px;
+  }
+}
+
 .window-shell {
   font-family: 'Manrope', sans-serif;
 }

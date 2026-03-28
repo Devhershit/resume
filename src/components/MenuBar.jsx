@@ -6,7 +6,7 @@ export function MenuBar({ activeWindowTitle }) {
   const timeLabel = useClock()
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[80] px-2 py-2 sm:px-4">
+    <header className="app-menu-bar fixed inset-x-0 top-0 z-[80] px-2 py-2 sm:px-4">
       <div className="pointer-events-none mx-auto flex h-10 w-full max-w-[1400px]">
         <GlassSurface
           width="100%"

@@ -4,6 +4,7 @@ import { DesktopGrid } from './components/DesktopGrid'
 import { Dock } from './components/Dock'
 import Grainient from './components/Grainient'
 import bgOffImage from '../icons/mainport.JPG'
+import phoneMainImage from '../icons/phone-main.jpg'
 import { WindowLayer } from './components/WindowLayer'
 import { AboutContent } from './content/AboutContent'
 import { ProjectsContent } from './content/ProjectsContent'
@@ -21,7 +22,7 @@ const TITLES = {
   'work-exp': 'Work Experience',
   resume: 'Resume',
   contact: 'Contact',
-  safari: 'Safari',
+  safari: 'Certification',
   photos: 'Photos',
   terminal: 'Terminal',
 }
@@ -121,7 +122,15 @@ function App() {
   }
 
   return (
-    <main className="desktop-wallpaper relative h-svh w-full overflow-hidden text-slate-900">
+    <main
+      className="app-shell desktop-wallpaper relative h-svh w-full overflow-hidden text-slate-900"
+      style={{
+        '--desktop-wallpaper-image': `url(${bgOffImage})`,
+        '--phone-wallpaper-image': `url(${phoneMainImage})`,
+        '--desktop-wallpaper-position': 'center center',
+        '--phone-wallpaper-position': 'center top',
+      }}
+    >
       {isAnimatedBackgroundActive && (
         <div className="absolute inset-0">
           <Grainient
@@ -152,12 +161,9 @@ function App() {
         </div>
       )}
       {!isAnimatedBackgroundActive && (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${bgOffImage})` }}
-        />
+        <div className="wallpaper-image-layer pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat" />
       )}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.16),transparent_42%),radial-gradient(circle_at_85%_8%,rgba(255,255,255,0.12),transparent_40%),linear-gradient(180deg,rgba(3,7,18,0.16),rgba(3,7,18,0.22))]" />
+      <div className="wallpaper-overlay-layer pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.16),transparent_42%),radial-gradient(circle_at_85%_8%,rgba(255,255,255,0.12),transparent_40%),linear-gradient(180deg,rgba(3,7,18,0.16),rgba(3,7,18,0.22))]" />
 
       <MenuBar activeWindowTitle={activeWindowTitle} />
 
