@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useDockMagnify } from '../hooks/useDockMagnify'
 import GlassSurface from './GlassSurface'
 
@@ -29,8 +30,20 @@ function DockVisual({ item }) {
   return null
 }
 
-export function Dock({ openWindows, onAppClick }) {
+export function Dock({ openWindows, onAppClick, onAppHover }) {
   const { registerItem, onPointerMove, onPointerLeave, jumpItem, itemRefs } = useDockMagnify()
+  const [isMobileViewport, setIsMobileViewport] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+
+    const query = window.matchMedia('(max-width: 768px)')
+    const updateViewport = () => setIsMobileViewport(query.matches)
+
+    updateViewport()
+    query.addEventListener('change', updateViewport)
+    return () => query.removeEventListener('change', updateViewport)
+  }, [])
 
   const handleDockClick = (item) => {
     jumpItem(item.id)
@@ -44,11 +57,12 @@ export function Dock({ openWindows, onAppClick }) {
         height={86}
         borderRadius={30}
         className="pointer-events-auto"
-        displace={0.5}
-        distortionScale={-180}
+        displace={isMobileViewport ? 0 : 0.3}
+        blur={isMobileViewport ? 7 : 11}
+        distortionScale={isMobileViewport ? -40 : -180}
         redOffset={0}
-        greenOffset={10}
-        blueOffset={20}
+        greenOffset={isMobileViewport ? 4 : 10}
+        blueOffset={isMobileViewport ? 8 : 20}
         brightness={50}
         opacity={0.93}
         mixBlendMode="screen"
@@ -65,6 +79,8 @@ export function Dock({ openWindows, onAppClick }) {
                 aria-label={`${item.title} app`}
                 ref={(node) => registerItem(item.id, node)}
                 onClick={() => handleDockClick(item)}
+                onPointerEnter={() => onAppHover?.(item.id)}
+                onFocus={() => onAppHover?.(item.id)}
                 className="dock-app-button group relative flex h-16 w-16 origin-bottom items-center justify-center"
               >
                 <DockVisual item={item} />

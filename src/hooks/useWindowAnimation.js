@@ -74,8 +74,9 @@ export function useWindowAnimation(windowRef, sourceRect) {
         scale: 1,
         x: 0,
         y: 0,
-        duration: 0.62, // Standard macOS window open duration
-        ease: 'power3.out', // Easing: starts fast, ends slow (feels natural)
+        duration: 0.36,
+        ease: 'power2.out',
+        force3D: true,
       },
     )
   }, [windowRef, sourceRect])
@@ -108,8 +109,9 @@ export function useWindowAnimation(windowRef, sourceRect) {
         scale: 0.16, // End even smaller than open start
         x: offset.x,
         y: offset.y,
-        duration: 0.34, // Faster close than open (feels snappy)
-        ease: 'power2.inOut',
+        duration: 0.2,
+        ease: 'power2.in',
+        force3D: true,
         onComplete: resolve,
       })
     })

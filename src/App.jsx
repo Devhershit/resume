@@ -42,6 +42,19 @@ const PhotosContent = lazy(() => import('./content/PhotosContent').then(m => ({ 
 const SafariContent = lazy(() => import('./content/SafariContent').then(m => ({ default: m.SafariContent })))
 const LaunchpadContent = lazy(() => import('./content/LaunchpadContent').then(m => ({ default: m.LaunchpadContent })))
 
+const CONTENT_PREFETCHERS = {
+  launchpad: () => import('./content/LaunchpadContent'),
+  about: () => import('./content/AboutContent'),
+  projects: () => import('./content/ProjectsContent'),
+  'work-exp': () => import('./content/WorkExpContent'),
+  resume: () => import('./content/ResumeContent'),
+  socials: () => import('./content/SocialsContent'),
+  contact: () => import('./content/ContactContent'),
+  safari: () => import('./content/SafariContent'),
+  photos: () => import('./content/PhotosContent'),
+  terminal: () => import('./content/TerminalContent'),
+}
+
 /**
  * Fallback component shown while lazy content loads.
  * Set to null (invisible) for seamless UX.
@@ -133,6 +146,12 @@ function App() {
     event.stopPropagation()
     const sourceRect = event.currentTarget.getBoundingClientRect()
     openWindow({ id: folder.id, title: folder.title, sourceRect })
+  }
+
+  const handlePrefetchWindow = (id) => {
+    const prefetch = CONTENT_PREFETCHERS[id]
+    if (!prefetch) return
+    prefetch().catch(() => {})
   }
 
   const handleDockClick = (item, sourceRect) => {
@@ -238,7 +257,7 @@ function App() {
 
       <MenuBar activeWindowTitle={activeWindowTitle} />
 
-      <DesktopGrid onOpenFolder={handleOpenFolder} />
+      <DesktopGrid onOpenFolder={handleOpenFolder} onPrefetchFolder={handlePrefetchWindow} />
 
       <WindowLayer
         windows={windows}
@@ -251,7 +270,7 @@ function App() {
         onResize={setWindowSize}
       />
 
-      <Dock openWindows={windows} onAppClick={handleDockClick} />
+      <Dock openWindows={windows} onAppClick={handleDockClick} onAppHover={handlePrefetchWindow} />
     </main>
   )
 }

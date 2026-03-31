@@ -7,6 +7,8 @@ export function MacWindow({ windowData, onFocus, onClose, onMinimize, onToggleMa
   const shellRef = useRef(null)
   const animationRef = useRef(null)
   const nodeRef = useRef(null)
+  const dragRafRef = useRef(null)
+  const pendingPositionRef = useRef(null)
   const [isMobileViewport, setIsMobileViewport] = useState(false)
   const { animateClose } = useWindowAnimation(animationRef, windowData.sourceRect)
   const safeSize = windowData.size ?? { width: 560, height: 560 }
@@ -47,13 +49,27 @@ export function MacWindow({ windowData, onFocus, onClose, onMinimize, onToggleMa
   }
 
   const handleWindowDrag = (_, data) => {
-    if (isMobileViewport) {
-      onMove(windowData.id, { x: safePosition.x, y: data.y })
-      return
-    }
+    pendingPositionRef.current = isMobileViewport
+      ? { x: safePosition.x, y: data.y }
+      : { x: data.x, y: data.y }
 
-    onMove(windowData.id, { x: data.x, y: data.y })
+    if (dragRafRef.current !== null) return
+
+    dragRafRef.current = window.requestAnimationFrame(() => {
+      dragRafRef.current = null
+      if (!pendingPositionRef.current) return
+      onMove(windowData.id, pendingPositionRef.current)
+      pendingPositionRef.current = null
+    })
   }
+
+  useEffect(() => {
+    return () => {
+      if (dragRafRef.current !== null) {
+        window.cancelAnimationFrame(dragRafRef.current)
+      }
+    }
+  }, [])
 
   const shellStyle = windowData.isMaximized
     ? {

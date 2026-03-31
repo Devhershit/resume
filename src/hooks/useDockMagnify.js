@@ -24,6 +24,9 @@ import gsap from 'gsap'
  */
 export function useDockMagnify() {
   const itemRefs = useRef({})
+  const pointerRef = useRef({ x: 0, y: 0 })
+  const frameRef = useRef(null)
+  const scaleSettersRef = useRef({})
 
   const shouldReduceMotion = () =>
     typeof window !== 'undefined'
@@ -40,9 +43,42 @@ export function useDockMagnify() {
   const registerItem = (id, node) => {
     if (!node) {
       delete itemRefs.current[id]
+      delete scaleSettersRef.current[id]
       return
     }
+
+    scaleSettersRef.current[id] = gsap.quickTo(node, 'scale', {
+      duration: 0.16,
+      ease: 'power2.out',
+    })
+
     itemRefs.current[id] = node
+  }
+
+  const updateMagnify = () => {
+    frameRef.current = null
+    const pointerX = pointerRef.current.x
+    const pointerY = pointerRef.current.y
+
+    Object.entries(itemRefs.current).forEach(([id, node]) => {
+      const rect = node.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+
+      const dx = pointerX - centerX
+      const dy = pointerY - centerY
+      const distance = Math.hypot(dx, dy)
+      const influenceRadius = rect.width * 1.6
+
+      if (distance >= influenceRadius) {
+        scaleSettersRef.current[id]?.(1)
+        return
+      }
+
+      const influence = 1 - distance / influenceRadius
+      const scale = 1 + influence * 0.3
+      scaleSettersRef.current[id]?.(scale)
+    })
   }
 
   /**
@@ -55,31 +91,11 @@ export function useDockMagnify() {
    * @param {PointerEvent} event - Mouse/pointer move event
    */
   const onPointerMove = (event) => {
-    const pointerX = event.clientX
-    const pointerY = event.clientY
+    pointerRef.current.x = event.clientX
+    pointerRef.current.y = event.clientY
 
-    Object.values(itemRefs.current).forEach((node) => {
-      const rect = node.getBoundingClientRect()
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
-      
-      // Calculate distance from pointer to icon center
-      const distanceX = Math.abs(pointerX - centerX)
-      const distanceY = Math.abs(pointerY - centerY)
-      
-      // Only magnify if pointer is directly over the item
-      // (within its bounding box with some tolerance)
-      const isHovered = distanceX <= rect.width && distanceY <= rect.height
-      
-      const scale = isHovered ? 1.3 : 1
-
-      // GSAP animate: smooth transition to target scale
-      gsap.to(node, {
-        scale,
-        duration: 0.2,
-        ease: 'power2.out',
-      })
-    })
+    if (frameRef.current !== null) return
+    frameRef.current = window.requestAnimationFrame(updateMagnify)
   }
 
   /**
@@ -87,12 +103,13 @@ export function useDockMagnify() {
    * Reset all icons to normal size (scale: 1).
    */
   const onPointerLeave = () => {
-    Object.values(itemRefs.current).forEach((node) => {
-      gsap.to(node, {
-        scale: 1,
-        duration: 0.25,
-        ease: 'power2.out',
-      })
+    if (frameRef.current !== null) {
+      window.cancelAnimationFrame(frameRef.current)
+      frameRef.current = null
+    }
+
+    Object.keys(itemRefs.current).forEach((id) => {
+      scaleSettersRef.current[id]?.(1)
     })
   }
 
@@ -113,17 +130,17 @@ export function useDockMagnify() {
     gsap
       .timeline()
       .to(node, {
-        y: -16,
+        y: -14,
         scaleX: currentScale * 1.02,
         scaleY: currentScale * 0.98,
-        duration: 0.12,
+        duration: 0.1,
         ease: 'power2.out',
       })
       .to(node, {
         y: 0,
         scaleX: currentScale,
         scaleY: currentScale,
-        duration: 0.28,
+        duration: 0.24,
         ease: 'bounce.out',
       })
   }
