@@ -223,6 +223,7 @@ export const useWindowStore = create((set, get) => ({
     const constraints = getViewportWindowConstraints(viewport)
     const target = state.windows[id]
     const size = target.size ?? { width: 560, height: 560 }
+
     const clampedPosition = {
       x: clamp(position.x, constraints.sidePadding, Math.max(constraints.sidePadding, viewport.width - size.width - constraints.sidePadding)),
       y: clamp(position.y, constraints.topInset, Math.max(constraints.topInset, viewport.height - size.height - constraints.sidePadding)),
@@ -245,6 +246,7 @@ export const useWindowStore = create((set, get) => ({
 
     const viewport = getViewportSize()
     const constraints = getViewportWindowConstraints(viewport)
+
     const clampedSize = {
       width: clamp(size.width, 280, Math.max(280, viewport.width - constraints.horizontalInset)),
       height: clamp(size.height, 240, Math.max(240, viewport.height - constraints.bottomOffset)),

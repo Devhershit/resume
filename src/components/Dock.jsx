@@ -1,11 +1,11 @@
 import { useDockMagnify } from '../hooks/useDockMagnify'
 import GlassSurface from './GlassSurface'
 
-import finderIcon from '../../icons/finder.png'
-import safariIcon from '../../icons/safari-ios.png'
+import finderIcon from '../../icons/finder.webp'
+import safariIcon from '../../icons/safari-ios.webp'
 import photosIcon from '../../icons/ios-photos.png'
 import terminalIcon from '../../icons/terminal.png'
-import contactIcon from '../../icons/contact-ios.png'
+import contactIcon from '../../icons/contact-ios.webp'
 
 const ICON_SOURCES = {
   launchpad: finderIcon,
@@ -16,7 +16,7 @@ const ICON_SOURCES = {
 }
 
 const dockItems = [
-  { id: 'launchpad', title: 'Launchpad' },
+  { id: 'launchpad', title: 'Launchpad', windowId: 'launchpad' },
   { id: 'safari', title: 'Certification', windowId: 'safari' },
   { id: 'photos', title: 'Photos', windowId: 'photos' },
   { id: 'terminal', title: 'Terminal', windowId: 'terminal' },
@@ -25,12 +25,17 @@ const dockItems = [
 
 function DockVisual({ item }) {
   const iconSrc = ICON_SOURCES[item.id]
-  if (iconSrc) return <img src={iconSrc} alt={item.title} className="dock-app-icon h-12 w-12" />
+  if (iconSrc) return <img src={iconSrc} alt={item.title} className="dock-app-icon h-12 w-12" loading="lazy" decoding="async" />
   return null
 }
 
 export function Dock({ openWindows, onAppClick }) {
-  const { registerItem, onPointerMove, onPointerLeave, itemRefs } = useDockMagnify()
+  const { registerItem, onPointerMove, onPointerLeave, jumpItem, itemRefs } = useDockMagnify()
+
+  const handleDockClick = (item) => {
+    jumpItem(item.id)
+    onAppClick(item, itemRefs.current[item.id]?.getBoundingClientRect())
+  }
 
   return (
     <div className="app-dock pointer-events-none fixed inset-x-0 bottom-5 z-[90] flex justify-center px-4">
@@ -57,8 +62,9 @@ export function Dock({ openWindows, onAppClick }) {
                 key={item.id}
                 type="button"
                 title={item.title}
+                aria-label={`${item.title} app`}
                 ref={(node) => registerItem(item.id, node)}
-                onClick={() => onAppClick(item, itemRefs.current[item.id]?.getBoundingClientRect())}
+                onClick={() => handleDockClick(item)}
                 className="dock-app-button group relative flex h-16 w-16 origin-bottom items-center justify-center"
               >
                 <DockVisual item={item} />

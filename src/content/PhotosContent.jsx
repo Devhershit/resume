@@ -1,12 +1,12 @@
-import project1 from '../../work img/project-1.png'
-import project2 from '../../work img/project-2 (1).png'
-import project3 from '../../work img/project-3.png'
-import project4 from '../../work img/project-4.png'
-import project5 from '../../work img/project-5.png'
-import project6 from '../../work img/project-6.png'
-import project7 from '../../work img/project-7.png'
-import project8 from '../../work img/project-8.png'
-import project9 from '../../work img/project-9.png'
+import project1 from '../../work img/project-1.webp'
+import project2 from '../../work img/project-2 (1).webp'
+import project3 from '../../work img/project-3.webp'
+import project4 from '../../work img/project-4.webp'
+import project5 from '../../work img/project-5.webp'
+import project6 from '../../work img/project-6.webp'
+import project7 from '../../work img/project-7.webp'
+import project8 from '../../work img/project-8.webp'
+import project9 from '../../work img/project-9.webp'
 
 const photos = [
   project1,

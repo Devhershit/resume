@@ -1,20 +1,13 @@
-import { useEffect, useState } from 'react'
 import { FOLDER_ORDER, WINDOW_DEFINITIONS } from '../data/windows'
 import { FolderIcon } from '../icons/FolderIcon'
 
 const folderLookup = new Map(WINDOW_DEFINITIONS.map((item) => [item.id, item]))
 
-function FolderItem({ id, onOpenFolder, isTouchViewport }) {
+function FolderItem({ id, onOpenFolder }) {
   const folder = folderLookup.get(id)
   if (!folder) return null
 
   const handleClick = (event) => {
-    if (!isTouchViewport) return
-    onOpenFolder(folder)(event)
-  }
-
-  const handleDoubleClick = (event) => {
-    if (isTouchViewport) return
     onOpenFolder(folder)(event)
   }
 
@@ -24,7 +17,7 @@ function FolderItem({ id, onOpenFolder, isTouchViewport }) {
         type="button"
         className="flex w-full flex-col items-center gap-2 rounded-xl p-2 text-white/95 outline-none"
         onClick={handleClick}
-        onDoubleClick={handleDoubleClick}
+        aria-label={`Open ${folder.title}`}
       >
         <FolderIcon className="desktop-folder-icon h-12 w-12 sm:h-16 sm:w-16" />
         <span className="desktop-folder-label px-2 py-0.5 text-center text-xs font-medium tracking-wide text-white/95">
@@ -36,28 +29,6 @@ function FolderItem({ id, onOpenFolder, isTouchViewport }) {
 }
 
 export function DesktopGrid({ onOpenFolder }) {
-  const [isTouchViewport, setIsTouchViewport] = useState(false)
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
-
-    const viewportQuery = window.matchMedia('(max-width: 768px)')
-    const touchQuery = window.matchMedia('(pointer: coarse)')
-
-    const updateMode = () => {
-      setIsTouchViewport(viewportQuery.matches && touchQuery.matches)
-    }
-
-    updateMode()
-    viewportQuery.addEventListener('change', updateMode)
-    touchQuery.addEventListener('change', updateMode)
-
-    return () => {
-      viewportQuery.removeEventListener('change', updateMode)
-      touchQuery.removeEventListener('change', updateMode)
-    }
-  }, [])
-
   return (
     <div className="app-desktop-grid pointer-events-none fixed inset-0 top-12">
       <div className="app-desktop-folders pointer-events-none absolute left-2 top-3 max-h-[calc(100svh-64px)] overflow-y-auto sm:left-4 sm:top-5">
@@ -67,7 +38,6 @@ export function DesktopGrid({ onOpenFolder }) {
               key={id}
               id={id}
               onOpenFolder={onOpenFolder}
-              isTouchViewport={isTouchViewport}
             />
           ))}
         </div>

@@ -12,6 +12,13 @@ export function MacWindow({ windowData, onFocus, onClose, onMinimize, onToggleMa
   const safeSize = windowData.size ?? { width: 560, height: 560 }
   const safePosition = windowData.position ?? { x: 140, y: 110 }
 
+  const handleWindowKeyDown = async (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      await handleClose()
+    }
+  }
+
   useEffect(() => {
     if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
 
@@ -75,7 +82,17 @@ export function MacWindow({ windowData, onFocus, onClose, onMinimize, onToggleMa
       onDrag={handleWindowDrag}
       onStop={handleWindowDrag}
     >
-      <article ref={nodeRef} className="pointer-events-auto absolute" style={{ zIndex: windowData.zIndex }} onMouseDown={() => onFocus(windowData.id)}>
+      <article
+        ref={nodeRef}
+        className="pointer-events-auto absolute"
+        style={{ zIndex: windowData.zIndex }}
+        role="dialog"
+        aria-label={`${windowData.title} window`}
+        aria-modal="false"
+        tabIndex={0}
+        onKeyDown={handleWindowKeyDown}
+        onMouseDown={() => onFocus(windowData.id)}
+      >
         <div
           ref={animationRef}
           className="h-full"
