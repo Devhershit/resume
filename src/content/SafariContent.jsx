@@ -1,4 +1,5 @@
 import britishAirwaysCertificatePdf from '../../work img/brithish airways certificate.pdf'
+import genAiCertificatePdf from '../../work img/gen ai certificate.pdf'
 
 const certifications = [
   {
@@ -25,6 +26,13 @@ const certifications = [
     code: 'Verify in certificate',
     date: 'See certificate',
     certificateUrl: britishAirwaysCertificatePdf,
+  },
+  {
+    title: 'Gen AI Certificate',
+    provider: 'Generative AI',
+    code: 'See certificate',
+    date: 'March 2026',
+    certificateUrl: genAiCertificatePdf,
   },
 ]
 
