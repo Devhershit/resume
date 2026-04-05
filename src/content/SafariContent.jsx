@@ -1,3 +1,5 @@
+import britishAirwaysCertificatePdf from '../../work img/brithish airways certificate.pdf'
+
 const certifications = [
   {
     title: 'Programming with Python 3.X',
@@ -16,6 +18,13 @@ const certifications = [
     provider: 'Great Learning Academy',
     code: 'Verify in resume',
     date: 'November 2024',
+  },
+  {
+    title: 'British Airways Certificate',
+    provider: 'British Airways',
+    code: 'Verify in certificate',
+    date: 'See certificate',
+    certificateUrl: britishAirwaysCertificatePdf,
   },
 ]
 
@@ -44,6 +53,16 @@ export function SafariContent() {
               <p className="mt-1 text-sm text-slate-700">{item.provider}</p>
               <p className="mt-1 text-xs text-slate-500">Code: {item.code}</p>
               <p className="mt-1 text-xs text-slate-500">Completed: {item.date}</p>
+              {item.certificateUrl ? (
+                <a
+                  href={item.certificateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-block text-xs font-medium text-sky-700 underline"
+                >
+                  View certificate
+                </a>
+              ) : null}
             </article>
           ))}
         </div>
