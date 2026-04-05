@@ -1,5 +1,8 @@
 import britishAirwaysCertificatePdf from '../../work img/brithish airways certificate.pdf'
+import eaCertificatePdf from '../../work img/ea certificate.pdf'
+import geAerospaceCertificatePdf from '../../work img/ge aerospace.pdf'
 import genAiCertificatePdf from '../../work img/gen ai certificate.pdf'
+import jpMorganCertificatePdf from '../../work img/jp morgn certificate.pdf'
 
 const certifications = [
   {
@@ -21,18 +24,42 @@ const certifications = [
     date: 'November 2024',
   },
   {
-    title: 'British Airways Certificate',
-    provider: 'British Airways',
-    code: 'Verify in certificate',
-    date: 'See certificate',
-    certificateUrl: britishAirwaysCertificatePdf,
-  },
-  {
     title: 'Gen AI Certificate',
     provider: 'Generative AI',
     code: 'See certificate',
     date: 'March 2026',
     certificateUrl: genAiCertificatePdf,
+  },
+]
+
+const jobSimulations = [
+  {
+    title: 'British Airways Job Simulation',
+    provider: 'British Airways',
+    code: 'Certificate PDF',
+    date: 'See certificate',
+    certificateUrl: britishAirwaysCertificatePdf,
+  },
+  {
+    title: 'EA Job Simulation',
+    provider: 'Electronic Arts',
+    code: 'Certificate PDF',
+    date: 'See certificate',
+    certificateUrl: eaCertificatePdf,
+  },
+  {
+    title: 'GE Aerospace Job Simulation',
+    provider: 'GE Aerospace',
+    code: 'Certificate PDF',
+    date: 'See certificate',
+    certificateUrl: geAerospaceCertificatePdf,
+  },
+  {
+    title: 'J.P. Morgan Job Simulation',
+    provider: 'J.P. Morgan',
+    code: 'Certificate PDF',
+    date: 'See certificate',
+    certificateUrl: jpMorganCertificatePdf,
   },
 ]
 
@@ -73,6 +100,29 @@ export function SafariContent() {
               ) : null}
             </article>
           ))}
+        </div>
+
+        <div className="mt-8 border-t border-slate-200 pt-5">
+          <h4 className="text-lg font-semibold text-slate-900">Job Simulation</h4>
+
+          <div className="mt-4 space-y-3">
+            {jobSimulations.map((item) => (
+              <article key={`${item.title}-${item.provider}`} className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+                <h5 className="font-semibold text-slate-900">{item.title}</h5>
+                <p className="mt-1 text-sm text-slate-700">{item.provider}</p>
+                <p className="mt-1 text-xs text-slate-500">Code: {item.code}</p>
+                <p className="mt-1 text-xs text-slate-500">Completed: {item.date}</p>
+                <a
+                  href={item.certificateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-block text-xs font-medium text-sky-700 underline"
+                >
+                  View certificate
+                </a>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </div>
