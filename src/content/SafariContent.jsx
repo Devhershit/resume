@@ -4,6 +4,7 @@ import geAerospaceCertificatePdf from '../../work img/ge aerospace.pdf'
 import genAiCertificatePdf from '../../work img/gen ai certificate.pdf'
 import jpMorganCertificatePdf from '../../work img/jp morgn certificate.pdf'
 import delloiteCertificatePdf from '../../work img/delloite.pdf'
+import pythonCertificatePdf from '../../work img/Python-Certificate.pdf'
 import tataCertificatePdf from '../../work img/tata.pdf'
 
 const certifications = [
@@ -33,11 +34,18 @@ const certifications = [
     certificateUrl: genAiCertificatePdf,
   },
   {
-    title: 'Deloitte Python Certificate',
-    provider: 'Deloitte',
+    title: 'Delloiit',
+    provider: 'Delloiit',
     code: 'Certificate PDF',
     date: 'See certificate',
     certificateUrl: delloiteCertificatePdf,
+  },
+  {
+    title: 'Python Certificate',
+    provider: 'Python',
+    code: 'Certificate PDF',
+    date: 'See certificate',
+    certificateUrl: pythonCertificatePdf,
   },
   {
     title: 'Tata Certificate',
