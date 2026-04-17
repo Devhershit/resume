@@ -34,8 +34,8 @@ const certifications = [
     certificateUrl: genAiCertificatePdf,
   },
   {
-    title: 'Delloiit',
-    provider: 'Delloiit',
+    title: 'Deloitte',
+    provider: 'Deloitte',
     code: 'Certificate PDF',
     date: 'See certificate',
     certificateUrl: delloiteCertificatePdf,
