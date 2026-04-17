@@ -3,6 +3,8 @@ import eaCertificatePdf from '../../work img/ea certificate.pdf'
 import geAerospaceCertificatePdf from '../../work img/ge aerospace.pdf'
 import genAiCertificatePdf from '../../work img/gen ai certificate.pdf'
 import jpMorganCertificatePdf from '../../work img/jp morgn certificate.pdf'
+import delloiteCertificatePdf from '../../work img/delloite.pdf'
+import tataCertificatePdf from '../../work img/tata.pdf'
 
 const certifications = [
   {
@@ -29,6 +31,20 @@ const certifications = [
     code: 'See certificate',
     date: 'March 2026',
     certificateUrl: genAiCertificatePdf,
+  },
+  {
+    title: 'Deloitte Python Certificate',
+    provider: 'Deloitte',
+    code: 'Certificate PDF',
+    date: 'See certificate',
+    certificateUrl: delloiteCertificatePdf,
+  },
+  {
+    title: 'Tata Certificate',
+    provider: 'Tata',
+    code: 'Certificate PDF',
+    date: 'See certificate',
+    certificateUrl: tataCertificatePdf,
   },
 ]
 
