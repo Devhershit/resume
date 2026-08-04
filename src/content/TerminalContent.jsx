@@ -20,11 +20,11 @@ const getCommandLines = (normalized, prompt) => {
   }
 
   if (normalized === 'whoami') {
-    return ['Harshit - Software Engineering student focused on Frontend and AI/ML.']
+    return ['Harshit - Results-driven Software Developer and AI Specialist.']
   }
 
   if (normalized === 'skills') {
-    return ['React, JavaScript, Python, Tailwind CSS, REST APIs, NLP, SQL, Git']
+    return ['React.js, Python, JavaScript, FastAPI, TensorFlow, PyTorch, SQL, Git']
   }
 
   if (normalized === 'projects') {

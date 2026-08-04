@@ -33,17 +33,19 @@ export function ResumeContent() {
           <section className="mt-6">
             <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Profile</h4>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
-              Detail-oriented developer focused on building practical, user-first products with React,
-              JavaScript, and Python. Strong analytical grounding from aviation training and modern
-              software engineering workflows.
+              Results-driven Software Developer and AI Specialist combining rigorous analytical problem-solving from an aviation background with
+              modern web technologies (React.js, Python, JS). Proven ability to architect scalable applications, deploy machine learning models,
+              process complex datasets, and thrive in precision-focused, fast-paced environments.
             </p>
           </section>
 
           <section className="mt-6">
             <h4 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Skills</h4>
             <p className="mt-2 text-sm text-slate-700">
-              React.js, JavaScript (ES6+), Python, HTML5, CSS3, Tailwind CSS, REST APIs, NLP, SQL,
-              MySQL, Git, Figma, OpenAI API, Gemini API
+              <strong>Programming:</strong> C, Java, JavaScript (ES6+), Python, R, SQL<br />
+              <strong>Web Dev:</strong> React.js, FastAPI, Vite, HTML5, CSS3, Tailwind CSS, GSAP, DOM Manipulation<br />
+              <strong>AI &amp; Data:</strong> TensorFlow, PyTorch, CNN, Prompt Engineering, LLMs, NLP, Data Analysis, MySQL<br />
+              <strong>Tools &amp; Cloud:</strong> Streamlit, Git, GitHub, REST APIs, OpenAI API, Gemini API, VSCode, Figma
             </p>
           </section>
 

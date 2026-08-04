@@ -10,13 +10,6 @@ import drdoCertificateImg from '../../work img/drdo.jpeg'
 
 const certifications = [
   {
-    title: 'CFEES-DRDO Summer Internship',
-    provider: 'DRDO',
-    code: 'Certificate Image',
-    date: 'See certificate',
-    certificateUrl: drdoCertificateImg,
-  },
-  {
     title: 'Programming with Python 3.X',
     provider: 'Simplilearn SkillUp',
     code: '9983721',
@@ -28,70 +21,29 @@ const certifications = [
     code: '9983773',
     date: 'March 2026',
   },
-  {
-    title: 'Effective Communication',
-    provider: 'Great Learning Academy',
-    code: 'Verify in resume',
-    date: 'November 2024',
-  },
-  {
-    title: 'Gen AI Certificate',
-    provider: 'Generative AI',
-    code: 'See certificate',
-    date: 'March 2026',
-    certificateUrl: genAiCertificatePdf,
-  },
-  {
-    title: 'Deloitte',
-    provider: 'Deloitte',
-    code: 'Certificate PDF',
-    date: 'See certificate',
-    certificateUrl: delloiteCertificatePdf,
-  },
-  {
-    title: 'Python Certificate',
-    provider: 'Python',
-    code: 'Certificate PDF',
-    date: 'See certificate',
-    certificateUrl: pythonCertificatePdf,
-  },
-  {
-    title: 'Tata Certificate',
-    provider: 'Tata',
-    code: 'Certificate PDF',
-    date: 'See certificate',
-    certificateUrl: tataCertificatePdf,
-  },
 ]
 
 const jobSimulations = [
   {
-    title: 'British Airways Job Simulation',
-    provider: 'British Airways',
+    title: 'Data Analytics Virtual Experience',
+    provider: 'Deloitte (Forage)',
     code: 'Certificate PDF',
-    date: 'See certificate',
+    date: 'April 2026',
+    certificateUrl: delloiteCertificatePdf,
+  },
+  {
+    title: 'Data Science Virtual Experience',
+    provider: 'British Airways (Forage)',
+    code: 'Certificate PDF',
+    date: 'April 2026',
     certificateUrl: britishAirwaysCertificatePdf,
   },
   {
-    title: 'EA Job Simulation',
-    provider: 'Electronic Arts',
+    title: 'Explore Engineering Virtual Experience',
+    provider: 'GE Aerospace (Forage)',
     code: 'Certificate PDF',
-    date: 'See certificate',
-    certificateUrl: eaCertificatePdf,
-  },
-  {
-    title: 'GE Aerospace Job Simulation',
-    provider: 'GE Aerospace',
-    code: 'Certificate PDF',
-    date: 'See certificate',
+    date: 'April 2026',
     certificateUrl: geAerospaceCertificatePdf,
-  },
-  {
-    title: 'J.P. Morgan Job Simulation',
-    provider: 'J.P. Morgan',
-    code: 'Certificate PDF',
-    date: 'See certificate',
-    certificateUrl: jpMorganCertificatePdf,
   },
 ]
 

@@ -1,27 +1,23 @@
 const projects = [
   {
-    title: 'React Portfolio',
-    description: 'Personal portfolio built in React with responsive design and component architecture.',
+    title: 'AI-Powered Wildfire Detection System',
+    description: 'Architected a hybrid machine learning pipeline for accurate fire classification (React.js, FastAPI, CNN, Streamlit).',
   },
   {
-    title: 'Movie Sentiment Analyzer',
-    description: 'Python + NLP project that classifies sentiment from text data with ML pipelines.',
+    title: 'METAR-Sense (Aero Guard)',
+    description: 'Developed an AI-powered aviation weather reasoning tool leveraging LLMs to parse and interpret complex atmospheric feeds (Python, NLP).',
   },
   {
     title: 'GTA-6 Showcase Website',
-    description: 'Interactive React website with dynamic UI and animation-focused front-end experience.',
+    description: 'Programmed a highly interactive React.js web application utilizing advanced DOM manipulation and dynamic styling (React.js, GSAP).',
   },
   {
-    title: 'JS Weather App',
-    description: 'Vanilla JavaScript weather app using REST APIs and asynchronous real-time data fetching.',
+    title: 'Real-Time JS Weather App',
+    description: 'Integrated third-party RESTful APIs using asynchronous JavaScript to render live meteorological data across 200,000+ locations.',
   },
   {
-    title: 'Apple Vision Pro Concept',
-    description: 'Immersive UI concept website using HTML/CSS/JS with advanced animation effects.',
-  },
-  {
-    title: 'Amazon Clone',
-    description: 'E-commerce style frontend clone focused on modern layout, responsiveness, and UI flow.',
+    title: 'React Portfolio',
+    description: 'Personal portfolio built in React with responsive design, window management and component architecture.',
   },
 ]
 

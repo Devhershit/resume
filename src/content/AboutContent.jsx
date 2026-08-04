@@ -4,9 +4,9 @@ export function AboutContent() {
       <div className="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_14px_32px_rgba(15,23,42,0.12)]">
         <h3 className="text-xl font-semibold text-slate-900">About Me</h3>
         <p className="mt-4 leading-relaxed">
-          I&apos;m Harshit, a detail-oriented Software Engineering student focused on Frontend Development,
-          AI, and Machine Learning. I enjoy building fast, intuitive, and reliable web applications with
-          clean code and practical design.
+          I&apos;m Harshit, a results-driven Software Developer and AI Specialist combining rigorous analytical
+          problem-solving from an aviation background with modern web technologies. I enjoy building scalable
+          applications and deploying machine learning models in fast-paced environments.
         </p>
         <p className="mt-3 leading-relaxed">
           I study B.Tech CSE (AI &amp; ML) at Dronacharya College of Engineering (2024 - 2028), and I&apos;m
