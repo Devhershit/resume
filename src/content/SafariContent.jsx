@@ -6,8 +6,16 @@ import jpMorganCertificatePdf from '../../work img/jp morgn certificate.pdf'
 import delloiteCertificatePdf from '../../work img/delloite.pdf'
 import pythonCertificatePdf from '../../work img/Python-Certificate.pdf'
 import tataCertificatePdf from '../../work img/tata.pdf'
+import drdoCertificateImg from '../../work img/drdo.jpeg'
 
 const certifications = [
+  {
+    title: 'CFEES-DRDO Summer Internship',
+    provider: 'DRDO',
+    code: 'Certificate Image',
+    date: 'See certificate',
+    certificateUrl: drdoCertificateImg,
+  },
   {
     title: 'Programming with Python 3.X',
     provider: 'Simplilearn SkillUp',
