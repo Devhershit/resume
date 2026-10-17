@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Battery, Signal, SlidersHorizontal, Wifi, Copy, Check, ExternalLink } from 'lucide-react'
 import { useClock } from '../hooks/useClock'
+import { useWallpaperStore } from '../store/wallpaperStore'
 
 const EVIL_QUOTES = [
   "Look at you, inspecting my portfolio like you're actually gonna hire me. Pay the toll.",
@@ -18,11 +19,18 @@ const EVIL_QUOTES = [
 export function MenuBar() {
   const timeLabel = useClock()
   const [helpOpen, setHelpOpen] = useState(false)
+  const [viewOpen, setViewOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [quoteIndex, setQuoteIndex] = useState(0)
   const helpRef = useRef(null)
+  const viewRef = useRef(null)
 
   const upiId = 'Harshit1166@slc'
+
+  // Wallpaper store
+  const currentWallpaperId = useWallpaperStore((state) => state.currentId)
+  const wallpapers = useWallpaperStore((state) => state.wallpapers)
+  const setWallpaper = useWallpaperStore((state) => state.setWallpaper)
 
   // Constant 5-second rotation through the 10 evil quotes
   useEffect(() => {
@@ -45,12 +53,18 @@ export function MenuBar() {
       if (helpRef.current && !helpRef.current.contains(e.target)) {
         setHelpOpen(false)
       }
+      if (viewRef.current && !viewRef.current.contains(e.target)) {
+        setViewOpen(false)
+      }
     }
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setHelpOpen(false)
+      if (e.key === 'Escape') {
+        setHelpOpen(false)
+        setViewOpen(false)
+      }
     }
 
-    if (helpOpen) {
+    if (helpOpen || viewOpen) {
       document.addEventListener('mousedown', handleOutsideClick)
       document.addEventListener('keydown', handleKeyDown)
     }
@@ -58,7 +72,7 @@ export function MenuBar() {
       document.removeEventListener('mousedown', handleOutsideClick)
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [helpOpen])
+  }, [helpOpen, viewOpen])
 
   return (
     <header className="app-menu-bar fixed inset-x-0 top-0 z-[80]">
@@ -68,7 +82,97 @@ export function MenuBar() {
           <span className="font-bold text-white tracking-tight">Harshit OS</span>
           <span className="text-white/90">File</span>
           <span className="text-white/90">Edit</span>
-          <span className="text-white/90">View</span>
+
+          {/* View Menu Section */}
+          <div className="relative" ref={viewRef}>
+            <button
+              type="button"
+              onClick={() => {
+                setViewOpen((prev) => !prev)
+                setHelpOpen(false)
+              }}
+              className="text-white/90 cursor-pointer focus:outline-none"
+            >
+              View
+            </button>
+
+            {/* View Dropdown - Browse Wallpapers */}
+            {viewOpen && (
+              <div
+                className="absolute left-0 top-full mt-2 w-[300px] sm:w-[340px] rounded-2xl border border-slate-200/90 bg-white/95 p-4 text-slate-800 shadow-[0_24px_60px_rgba(15,23,42,0.28)] backdrop-blur-2xl z-[90] animate-in fade-in zoom-in-95 duration-150"
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setViewOpen(false)}
+                      className="h-3 w-3 rounded-full bg-[#FF5F57] shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_1px_2px_rgba(0,0,0,0.15)] ring-1 ring-black/10 transition-transform active:scale-90"
+                      aria-label="Close"
+                    />
+                    <span className="h-3 w-3 rounded-full bg-[#FEBC2E] shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_1px_2px_rgba(0,0,0,0.15)] ring-1 ring-black/10" />
+                    <span className="h-3 w-3 rounded-full bg-[#28C840] shadow-[inset_0_1px_1px_rgba(255,255,255,0.5),0_1px_2px_rgba(0,0,0,0.15)] ring-1 ring-black/10" />
+                    <span className="ml-2 text-xs font-semibold text-slate-800">Browse Wallpapers</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-slate-400">Desktop</span>
+                </div>
+
+                {/* Wallpaper List */}
+                <div className="mt-3 space-y-2">
+                  <p className="text-[11px] font-medium text-slate-500">
+                    Select a wallpaper to set as desktop background:
+                  </p>
+
+                  <div className="grid grid-cols-1 gap-2 pt-1">
+                    {wallpapers.map((wp) => {
+                      const isActive = wp.id === currentWallpaperId
+                      return (
+                        <button
+                          key={wp.id}
+                          type="button"
+                          onClick={() => setWallpaper(wp.id)}
+                          className={`flex items-center gap-3 rounded-xl border p-2 text-left transition-all ${
+                            isActive
+                              ? 'border-blue-500 bg-blue-50/70 shadow-sm ring-1 ring-blue-500/30'
+                              : 'border-slate-200 bg-white/70 hover:bg-white hover:border-slate-300'
+                          }`}
+                        >
+                          <img
+                            src={wp.thumbnail}
+                            alt={wp.name}
+                            className="h-12 w-16 rounded-lg object-cover border border-black/10 shadow-sm shrink-0"
+                          />
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-1">
+                              <h5 className="text-xs font-semibold text-slate-900 truncate">{wp.name}</h5>
+                              {isActive && (
+                                <span className="flex items-center gap-1 text-[10px] font-semibold text-blue-600 bg-blue-100/70 px-1.5 py-0.5 rounded-md shrink-0">
+                                  <Check size={10} /> Active
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-[10px] text-slate-500 mt-0.5 truncate">{wp.tagline}</p>
+                          </div>
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between">
+                  <span className="text-[10px] text-slate-400">Auto-saved to your browser</span>
+                  <button
+                    type="button"
+                    onClick={() => setViewOpen(false)}
+                    className="text-[11px] font-medium text-slate-600 hover:text-slate-900 px-2 py-1 rounded"
+                  >
+                    Done
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
           <span className="text-white/90">Go</span>
           <span className="text-white/90">Window</span>
 

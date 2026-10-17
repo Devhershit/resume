@@ -8,6 +8,7 @@ import { WindowLayer } from './components/WindowLayer'
 import { useWindowStore } from './store/windowStore'
 import { GeniePortal } from './components/GeniePortal'
 import { useGenieStore } from './store/genieStore'
+import { useWallpaperStore } from './store/wallpaperStore'
 import { getCachedSnapshot, getOrMakeWindowSnapshot } from './utils/windowSnapshot'
 import { CustomCursor } from './components/CustomCursor'
 
@@ -277,11 +278,17 @@ function App() {
     }
   }, [isBackgroundEnabled])
 
+  const currentWallpaperId = useWallpaperStore((state) => state.currentId)
+  const wallpapers = useWallpaperStore((state) => state.wallpapers)
+  const activeWallpaper = useMemo(() => {
+    return wallpapers.find((w) => w.id === currentWallpaperId) || wallpapers[0]
+  }, [wallpapers, currentWallpaperId])
+
   return (
     <main
       className="app-shell desktop-wallpaper relative h-svh w-full overflow-hidden text-slate-900"
       style={{
-        '--desktop-wallpaper-image': `url(${bgOffImage})`,
+        '--desktop-wallpaper-image': `url(${activeWallpaper.url})`,
         '--phone-wallpaper-image': `url(${phoneMainImage})`,
         '--desktop-wallpaper-position': 'center center',
         '--phone-wallpaper-position': 'center top',
