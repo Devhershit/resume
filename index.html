@@ -2,17 +2,132 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Interactive macOS-style portfolio with draggable windows, projects, work experience, and contact hub." />
-    <meta property="og:title" content="Portfolio" />
-    <meta property="og:description" content="Interactive desktop-style portfolio showcasing projects, work experience, and contact options." />
-    <meta property="og:type" content="website" />
+    <title>Harshit | Software Developer &amp; AI Specialist</title>
+
+    <!-- Brand Entity Disambiguation (Prevents Google from displaying "Vercel" as site name) -->
+    <meta name="title" content="Harshit | Software Developer &amp; AI Specialist" />
+    <meta name="description" content="Official portfolio of Harshit, Software Developer &amp; AI Specialist. Interactive macOS desktop featuring full-stack applications, machine learning systems, and achievements." />
+    <meta name="application-name" content="Harshit" />
+    <meta name="author" content="Harshit" />
+    <meta name="creator" content="Harshit" />
+    <meta name="publisher" content="Harshit" />
+    <meta name="keywords" content="Harshit, Harshit Gahlawat, Harshit Portfolio, Harshit Developer, Harshit DCE, Harshit AI Specialist, Software Developer Faridabad, Full Stack Developer India, macOS Web Portfolio, Dronacharya College of Engineering" />
+    <link rel="canonical" href="https://harshit-portfolio-alpha-85.vercel.app/" />
+
+    <!-- OpenGraph Metadata -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Harshit" />
+    <meta property="og:url" content="https://harshit-portfolio-alpha-85.vercel.app/" />
+    <meta property="og:title" content="Harshit | Software Developer &amp; AI Specialist" />
+    <meta property="og:description" content="Official portfolio of Harshit, Software Developer &amp; AI Specialist. Interactive macOS desktop experience with project case studies, credentials, and live terminal." />
+    <meta property="og:image" content="https://harshit-portfolio-alpha-85.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Harshit - Software Developer &amp; AI Specialist Portfolio" />
+
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@CarbonClicks" />
+    <meta name="twitter:creator" content="@CarbonClicks" />
+    <meta name="twitter:title" content="Harshit | Software Developer &amp; AI Specialist" />
+    <meta name="twitter:description" content="Official portfolio of Harshit, Software Developer &amp; AI Specialist. Interactive macOS desktop experience with project case studies, credentials, and live terminal." />
+    <meta name="twitter:image" content="https://harshit-portfolio-alpha-85.vercel.app/og-image.png" />
+
+    <!-- Multi-Resolution Favicon Suite (Prevents Google's gray globe fallback) -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
+
+    <!-- Preload Critical Above-The-Fold Assets -->
     <link rel="preload" as="image" href="/icons/mainport.webp" />
     <link rel="preload" as="image" href="/icons/phone-main.webp" />
-    <title>harshit os</title>
+
+    <!-- Schema.org JSON-LD Structured Data for Entity Graph -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://harshit-portfolio-alpha-85.vercel.app/#website",
+          "url": "https://harshit-portfolio-alpha-85.vercel.app/",
+          "name": "Harshit",
+          "alternateName": [
+            "Harshit Portfolio",
+            "Harshit Gahlawat",
+            "Harshit - Official Site",
+            "Harshit OS"
+          ],
+          "description": "Official portfolio of Harshit, Software Developer & AI Specialist.",
+          "inLanguage": "en-US",
+          "publisher": {
+            "@id": "https://harshit-portfolio-alpha-85.vercel.app/#person"
+          }
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://harshit-portfolio-alpha-85.vercel.app/#profilepage",
+          "url": "https://harshit-portfolio-alpha-85.vercel.app/",
+          "name": "Harshit | Software Developer & AI Specialist",
+          "mainEntity": {
+            "@id": "https://harshit-portfolio-alpha-85.vercel.app/#person"
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://harshit-portfolio-alpha-85.vercel.app/#person",
+          "name": "Harshit",
+          "alternateName": "Harshit Gahlawat",
+          "jobTitle": "Software Developer & AI Specialist",
+          "url": "https://harshit-portfolio-alpha-85.vercel.app/",
+          "image": "https://harshit-portfolio-alpha-85.vercel.app/og-image.png",
+          "email": "mailto:harshitgahlawat33@gmail.com",
+          "description": "Software Developer and AI Specialist combining analytical problem-solving with modern web technologies, machine learning models, and scalable architectures.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Faridabad",
+            "addressRegion": "Haryana",
+            "addressCountry": "India"
+          },
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Dronacharya College of Engineering (DCE)",
+            "sameAs": "https://ggn.dronacharya.info/"
+          },
+          "sameAs": [
+            "https://github.com/Devhershit",
+            "https://linkedin.com/in/harshit-gahlawat",
+            "https://x.com/CarbonClicks",
+            "https://wa.me/917011095547",
+            "https://www.instagram.com/"
+          ],
+          "knowsAbout": [
+            "Artificial Intelligence",
+            "Machine Learning",
+            "Full Stack Development",
+            "Software Engineering",
+            "React",
+            "JavaScript",
+            "Python",
+            "Tailwind CSS",
+            "Interactive Web Architecture"
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
+    <!-- Semantic Header for Search Engine Crawlers & Screen Readers -->
+    <header class="sr-only">
+      <h1>Harshit — Software Developer &amp; AI Specialist</h1>
+      <p>Official portfolio of Harshit (Harshit Gahlawat), studying B.Tech CSE (AI &amp; ML) at Dronacharya College of Engineering. Featuring interactive macOS desktop apps, machine learning models, and full-stack software development projects.</p>
+    </header>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

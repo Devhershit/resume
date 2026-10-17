@@ -33,8 +33,8 @@ function FolderItem({ id, onOpenFolder, onPrefetchFolder }) {
 export function DesktopGrid({ onOpenFolder, onPrefetchFolder }) {
   return (
     <div className="app-desktop-grid pointer-events-none fixed inset-0 top-12">
-      <div className="app-desktop-folders pointer-events-none absolute left-2 top-3 max-h-[calc(100svh-64px)] overflow-y-auto sm:left-4 sm:top-5">
-        <div className="pointer-events-auto flex flex-col gap-2 sm:gap-3">
+      <div className="app-desktop-folders pointer-events-none absolute right-2 top-3 max-h-[calc(100svh-120px)] overflow-y-auto sm:right-5 sm:top-5">
+        <div className="pointer-events-auto flex flex-col items-center gap-2 sm:gap-3">
           {FOLDER_ORDER.map((id) => (
             <FolderItem
               key={id}

@@ -242,8 +242,11 @@ const GlassSurface = ({
     }
   }
 
-  const glassSurfaceClasses =
-    'relative flex items-center justify-center overflow-hidden transition-opacity duration-[260ms] ease-out'
+  const isOverflowVisible = className.includes('overflow-visible')
+
+  const glassSurfaceClasses = `relative flex items-center justify-center ${
+    isOverflowVisible ? 'overflow-visible' : 'overflow-hidden'
+  } transition-opacity duration-[260ms] ease-out`
 
   const focusVisibleClasses = isDarkMode
     ? 'focus-visible:outline-2 focus-visible:outline-[#0A84FF] focus-visible:outline-offset-2'
@@ -299,7 +302,7 @@ const GlassSurface = ({
         </defs>
       </svg>
 
-      <div className="relative z-10 flex h-full w-full items-center justify-center rounded-[inherit] p-2">{children}</div>
+      <div className={`relative z-10 flex h-full w-full items-center justify-center rounded-[inherit] p-2 ${isOverflowVisible ? 'overflow-visible' : ''}`}>{children}</div>
     </div>
   )
 }

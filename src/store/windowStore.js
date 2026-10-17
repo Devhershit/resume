@@ -83,45 +83,45 @@ export const useWindowStore = create((set, get) => ({
 
       const windowData = existing
         ? {
-            ...existing,
-            isOpen: true,
-            isMinimized: false,
-            isMaximized: false,
-            title,
-            zIndex: nextZ,
-            position: existing.position
-              ? {
-                  x: clamp(
-                    existing.position.x,
-                    constraints.sidePadding,
-                    Math.max(constraints.sidePadding, viewport.width - (existing.size?.width ?? defaultSize.width) - constraints.sidePadding),
-                  ),
-                  y: clamp(
-                    existing.position.y,
-                    constraints.topInset,
-                    Math.max(constraints.topInset, viewport.height - (existing.size?.height ?? defaultSize.height) - constraints.sidePadding),
-                  ),
-                }
-              : defaultPosition,
-            size: existing.size
-              ? {
-                  width: clamp(existing.size.width, 280, maxWidth),
-                  height: clamp(existing.size.height, 240, maxHeight),
-                }
-              : defaultSize,
-            sourceRect: sourceRect ?? existing.sourceRect,
-          }
+          ...existing,
+          isOpen: true,
+          isMinimized: false,
+          isMaximized: false,
+          title,
+          zIndex: nextZ,
+          position: existing.position
+            ? {
+              x: clamp(
+                existing.position.x,
+                constraints.sidePadding,
+                Math.max(constraints.sidePadding, viewport.width - (existing.size?.width ?? defaultSize.width) - constraints.sidePadding),
+              ),
+              y: clamp(
+                existing.position.y,
+                constraints.topInset,
+                Math.max(constraints.topInset, viewport.height - (existing.size?.height ?? defaultSize.height) - constraints.sidePadding),
+              ),
+            }
+            : defaultPosition,
+          size: existing.size
+            ? {
+              width: clamp(existing.size.width, 280, maxWidth),
+              height: clamp(existing.size.height, 240, maxHeight),
+            }
+            : defaultSize,
+          sourceRect: sourceRect ?? existing.sourceRect,
+        }
         : {
-            id,
-            title,
-            isOpen: true,
-            isMinimized: false,
-            isMaximized: false,
-            zIndex: nextZ,
-            position: defaultPosition,
-            size: defaultSize,
-            sourceRect,
-          }
+          id,
+          title,
+          isOpen: true,
+          isMinimized: false,
+          isMaximized: false,
+          zIndex: nextZ,
+          position: defaultPosition,
+          size: defaultSize,
+          sourceRect,
+        }
 
       return {
         zCounter: nextZ,
@@ -195,6 +195,7 @@ export const useWindowStore = create((set, get) => ({
         [id]: {
           ...state.windows[id],
           isMinimized: false,
+          skipOpenAnimation: true,
           zIndex: nextZ,
         },
       },

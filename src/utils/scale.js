@@ -1,0 +1,14 @@
+/**
+ * Scales an input value linearly from a source range to a target range.
+ * Used for calculating sub-pixel dynamic dock offsets during mouse movement.
+ *
+ * @param {number} value
+ * @param {[number, number]} from
+ * @param {[number, number]} to
+ * @returns {number}
+ */
+export const scaleValue = (value, from, to) => {
+  const scale = (to[1] - to[0]) / (from[1] - from[0])
+  const capped = Math.min(from[1], Math.max(from[0], value)) - from[0]
+  return Math.floor(capped * scale + to[0])
+}

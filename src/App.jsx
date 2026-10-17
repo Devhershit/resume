@@ -6,6 +6,10 @@ import bgOffImage from '../icons/mainport.webp'
 import phoneMainImage from '../icons/phone-main.webp'
 import { WindowLayer } from './components/WindowLayer'
 import { useWindowStore } from './store/windowStore'
+import { GeniePortal } from './components/GeniePortal'
+import { useGenieStore } from './store/genieStore'
+import { getCachedSnapshot, getOrMakeWindowSnapshot } from './utils/windowSnapshot'
+import { CustomCursor } from './components/CustomCursor'
 
 /**
  * LAZY LOADING STRATEGY
@@ -41,8 +45,10 @@ const TerminalContent = lazy(() => import('./content/TerminalContent').then(m =>
 const PhotosContent = lazy(() => import('./content/PhotosContent').then(m => ({ default: m.PhotosContent })))
 const SafariContent = lazy(() => import('./content/SafariContent').then(m => ({ default: m.SafariContent })))
 const LaunchpadContent = lazy(() => import('./content/LaunchpadContent').then(m => ({ default: m.LaunchpadContent })))
+const FinderContent = lazy(() => import('./content/FinderContent').then(m => ({ default: m.FinderContent })))
 
 const CONTENT_PREFETCHERS = {
+  finder: () => import('./content/FinderContent'),
   launchpad: () => import('./content/LaunchpadContent'),
   about: () => import('./content/AboutContent'),
   projects: () => import('./content/ProjectsContent'),
@@ -65,7 +71,8 @@ function LoadingFallback() {
 }
 
 const TITLES = {
-  launchpad: 'Launchpad Hub',
+  finder: 'Finder',
+  launchpad: 'Launchpad',
   about: 'About Me',
   projects: 'Projects',
   'work-exp': 'Work Experience',
@@ -96,6 +103,7 @@ function App() {
   const closeWindow = useWindowStore((state) => state.closeWindow)
   const focusWindow = useWindowStore((state) => state.focusWindow)
   const minimizeWindow = useWindowStore((state) => state.minimizeWindow)
+  const restoreWindow = useWindowStore((state) => state.restoreWindow)
   const toggleMaximize = useWindowStore((state) => state.toggleMaximize)
   const setWindowPosition = useWindowStore((state) => state.setWindowPosition)
   const setWindowSize = useWindowStore((state) => state.setWindowSize)
@@ -132,6 +140,7 @@ function App() {
       photos: <Suspense fallback={<LoadingFallback />}><PhotosContent /></Suspense>,
       terminal: <Suspense fallback={<LoadingFallback />}><TerminalContent /></Suspense>,
       launchpad: <Suspense fallback={<LoadingFallback />}><LaunchpadContent /></Suspense>,
+      finder: <Suspense fallback={<LoadingFallback />}><FinderContent /></Suspense>,
     }),
     [],
   )
@@ -139,11 +148,76 @@ function App() {
   /**
    * Opens a window when user clicks a folder.
    * Captures source element's bounding rect for animation.
+  /**
+   * Helper to execute the authentic macOS Genie restore animation.
+   */
+  const triggerGenieRestore = (windowId, targetWin, sourceRect) => {
+    const reduceMotion = typeof window !== 'undefined'
+      && typeof window.matchMedia === 'function'
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const dockBtn = document.querySelector(`[data-dock-id="${windowId}"]`)
+      || document.querySelector('.dock-minimized-tray')
+      || document.querySelector('.app-dock-nav')
+      || document.querySelector('.app-dock')
+
+    const dockRect = sourceRect || dockBtn?.getBoundingClientRect() || {
+      left: window.innerWidth / 2 - 30,
+      top: window.innerHeight - 80,
+      width: 60,
+      height: 60,
+    }
+
+    const windowRect = {
+      left: targetWin.position?.x ?? 140,
+      top: targetWin.position?.y ?? 110,
+      width: targetWin.size?.width ?? 560,
+      height: targetWin.size?.height ?? 560,
+    }
+
+    const snapshot = getCachedSnapshot(windowId) || getOrMakeWindowSnapshot(null, {
+      windowId,
+      title: targetWin.title,
+    })
+
+    if (!reduceMotion && snapshot && dockRect) {
+      useGenieStore.getState().startGenieAnimation({
+        windowId,
+        type: 'restore',
+        windowRect,
+        targetRect: dockRect,
+        snapshot,
+        duration: 0.6,
+        onComplete: () => {
+          restoreWindow(windowId)
+        },
+      })
+      return
+    }
+
+    restoreWindow(windowId)
+  }
+
+  /**
+   * Opens a window when user clicks a folder.
+   * If already minimized, restores with Genie animation!
    */
   const handleOpenFolder = (folder) => (event) => {
     if (!folder) return
     event.preventDefault()
     event.stopPropagation()
+
+    const targetWin = windows[folder.id]
+    if (targetWin?.isOpen && targetWin.isMinimized) {
+      triggerGenieRestore(folder.id, targetWin)
+      return
+    }
+
+    if (targetWin?.isOpen && !targetWin.isMinimized) {
+      focusWindow(folder.id)
+      return
+    }
+
     const sourceRect = event.currentTarget.getBoundingClientRect()
     openWindow({ id: folder.id, title: folder.title, sourceRect })
   }
@@ -160,29 +234,23 @@ function App() {
       return
     }
 
-    if (item.id === 'launchpad') {
-      openWindow({ id: 'launchpad', title: TITLES.launchpad, sourceRect })
+    const windowId = item.windowId || item.id
+    const targetWin = windows[windowId]
+
+    // If window is currently open and minimized, restore with Genie animation!
+    if (targetWin?.isOpen && targetWin.isMinimized) {
+      triggerGenieRestore(windowId, targetWin, sourceRect)
       return
     }
 
-    if (item.id === 'terminal') {
-      openWindow({ id: 'terminal', title: TITLES.terminal, sourceRect })
+    // If window is already open and not minimized, focus it
+    if (targetWin?.isOpen && !targetWin.isMinimized) {
+      focusWindow(windowId)
       return
     }
 
-    if (item.id === 'photos') {
-      openWindow({ id: 'photos', title: TITLES.photos, sourceRect })
-      return
-    }
-
-    if (item.id === 'safari') {
-      openWindow({ id: 'safari', title: TITLES.safari, sourceRect })
-      return
-    }
-
-    if (item.id === 'contact') {
-      openWindow({ id: 'contact', title: TITLES.contact, sourceRect })
-    }
+    const title = TITLES[windowId] || item.title
+    openWindow({ id: windowId, title, sourceRect })
   }
 
   const renderContent = (id) => contentMap[id] ?? null
@@ -257,6 +325,9 @@ function App() {
 
       <MenuBar activeWindowTitle={activeWindowTitle} />
 
+      {/* Semantic Accessible Heading for Search Engine Crawlers & Screen Readers */}
+      <h1 className="sr-only">Harshit — Software Developer &amp; AI Specialist</h1>
+
       <DesktopGrid onOpenFolder={handleOpenFolder} onPrefetchFolder={handlePrefetchWindow} />
 
       <WindowLayer
@@ -271,6 +342,8 @@ function App() {
       />
 
       <Dock openWindows={windows} onAppClick={handleDockClick} onAppHover={handlePrefetchWindow} />
+      <GeniePortal />
+      <CustomCursor />
     </main>
   )
 }

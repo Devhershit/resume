@@ -42,7 +42,7 @@ function getOffsetFromSource(element, sourceRect) {
  * @param {DOMRect} sourceRect - Bounding rect of the source (folder/dock that triggered open)
  * @returns {{animateClose: Function}} Function to animate window closing
  */
-export function useWindowAnimation(windowRef, sourceRect) {
+export function useWindowAnimation(windowRef, sourceRect, skipOpenAnimation = false) {
   // Run animation on mount or when sourceRect changes
   useLayoutEffect(() => {
     if (!windowRef.current) return
@@ -53,7 +53,7 @@ export function useWindowAnimation(windowRef, sourceRect) {
 
     const element = windowRef.current
 
-    if (reduceMotion) {
+    if (reduceMotion || skipOpenAnimation) {
       gsap.set(element, { opacity: 1, scale: 1, x: 0, y: 0 })
       return
     }
@@ -79,7 +79,7 @@ export function useWindowAnimation(windowRef, sourceRect) {
         force3D: true,
       },
     )
-  }, [windowRef, sourceRect])
+  }, [windowRef, sourceRect, skipOpenAnimation])
 
   /**
    * Animate window closing back to target rectangle.
