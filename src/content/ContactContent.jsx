@@ -21,16 +21,16 @@ export function ContactContent() {
           </li>
           <li>
             <a
-              href="tel:+917011095547"
+              href="tel:+91701109554"
               className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2 transition hover:border-slate-300"
             >
               <img src={phoneLiquidIcon} alt="Phone" className="h-8 w-8 rounded-md object-cover" />
-              <span>Phone: +91-7011095547</span>
+              <span>Phone: +91-701109554</span>
             </a>
           </li>
           <li className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2">
             <img src={mapsLiquidIcon} alt="Location" className="h-8 w-8 rounded-md object-cover" />
-            <span>Location: Faridabad, Haryana, India</span>
+            <span>Location: Delhi NCR, India</span>
           </li>
         </ul>
       </div>

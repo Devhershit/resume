@@ -44,15 +44,15 @@ Your objective is to upgrade my portfolio repository to rank #1 on Google for my
 ### MY PROFILE DETAILS:
 - Full Name: Harshit (Harshit Gahlawat)
 - Professional Title: Software Developer & AI Specialist | Full Stack Developer
-- Target Keywords: Harshit, Harshit Gahlawat, Harshit Portfolio, Harshit Developer, Harshit DCE, Harshit AI Specialist, Software Developer Faridabad, Full Stack Developer India
+- Target Keywords: Harshit, Harshit Gahlawat, Harshit Portfolio, Harshit Developer, Harshit DCE, Harshit AI Specialist, Software Developer Delhi NCR, Full Stack Developer India
 - Domain / URL: https://harshit-portfolio-alpha-85.vercel.app/
-- Location: Faridabad, Haryana, India
+- Location: Delhi NCR, India
 - Current Organization / University: Dronacharya College of Engineering (B.Tech CSE AI & ML)
 - Social Handles:
   * GitHub: https://github.com/Devhershit
   * LinkedIn: https://linkedin.com/in/harshit-gahlawat
   * X / Twitter: https://x.com/CarbonClicks
-  * WhatsApp: https://wa.me/917011095547
+  * WhatsApp: https://wa.me/91701109554
   * Email: harshitgahlawat33@gmail.com
 
 ### MANDATORY SEO ARCHITECTURE TO IMPLEMENT:
@@ -211,7 +211,7 @@ Add this `<script>` directly into your `<head>`:
         "https://github.com/Devhershit",
         "https://linkedin.com/in/harshit-gahlawat",
         "https://x.com/CarbonClicks",
-        "https://wa.me/917011095547",
+        "https://wa.me/91701109554",
         "https://www.instagram.com/"
       ],
       "knowsAbout": [

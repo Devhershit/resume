@@ -59,7 +59,7 @@ export function SocialsContent() {
           </li>
           <li>
             <a
-              href="https://wa.me/917011095547"
+              href="https://wa.me/91701109554"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white px-3 py-2 transition hover:border-slate-300"

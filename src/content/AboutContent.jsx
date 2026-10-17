@@ -10,7 +10,7 @@ export function AboutContent() {
         </p>
         <p className="mt-3 leading-relaxed">
           I study B.Tech CSE (AI &amp; ML) at Dronacharya College of Engineering (2024 - 2028), and I&apos;m
-          based in Faridabad, Haryana, India. I am currently open to internships and entry-level
+          based in Delhi NCR, India. I am currently open to internships and entry-level
           opportunities.
         </p>
         <p className="mt-3 leading-relaxed">

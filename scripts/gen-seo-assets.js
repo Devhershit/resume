@@ -48,7 +48,7 @@ async function genFavicons() {
       <text x="120" y="280" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="68" font-weight="800" fill="#ffffff" letter-spacing="-1">Harshit</text>
       <text x="120" y="340" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="34" font-weight="700" fill="url(#textGrad)">Interactive macOS Desktop Portfolio</text>
 
-      <text x="120" y="405" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="400" fill="#94a3b8">B.Tech CSE (AI &amp; ML) @ Dronacharya College of Engineering | Faridabad, India</text>
+      <text x="120" y="405" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="20" font-weight="400" fill="#94a3b8">B.Tech CSE (AI &amp; ML) @ Dronacharya College of Engineering | Delhi NCR, India</text>
       <text x="120" y="440" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-size="18" font-weight="400" fill="#cbd5e1">Full Stack Development • Machine Learning • Interactive Web Systems</text>
 
       <rect x="120" y="480" width="390" height="38" rx="12" fill="rgba(15, 23, 42, 0.75)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
